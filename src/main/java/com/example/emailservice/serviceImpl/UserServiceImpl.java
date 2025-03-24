@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserService {
     public Boolean verifyToken(String token) {
         Confirmation confirmation = confirmationRepository.findByToken(token);
         User user = userRepository.findByEmailIgnoreCase(confirmation.getUser().getEmail());
-        return null;
+        user.setEnabled(true);
+        userRepository.save(user);
+            return Boolean.TRUE;
     }
 }
